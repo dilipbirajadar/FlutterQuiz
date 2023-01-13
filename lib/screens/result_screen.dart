@@ -21,6 +21,7 @@ class ResultScreen extends StatelessWidget {
         MediaQuery.of(context).size.height;
     double deviceWidth(BuildContext context) =>
         MediaQuery.of(context).size.width;
+    var orientation = MediaQuery.of(context).orientation;
 
 
     return Scaffold(
@@ -43,8 +44,8 @@ class ResultScreen extends StatelessWidget {
                     Radius.circular(15),
                   ),
                 ),
-                width: deviceWidth(context) * 0.75,
-                height: deviceHeight(context) * 0.25,
+                width: (orientation==Orientation.portrait) ? deviceWidth(context) * 0.75: deviceWidth(context) * 0.75,
+                height: (orientation==Orientation.landscape) ?deviceHeight(context) * 0.65: deviceHeight(context) * 0.25 ,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -97,8 +98,11 @@ class ResultScreen extends StatelessWidget {
           ),
           width: deviceWidth(context) * 0.6,
           height: deviceWidth(context) * 0.06,
-          margin: EdgeInsets.only(
+          margin: (orientation==Orientation.portrait) ?EdgeInsets.only(
             top: deviceHeight(context) * 0.36,
+            left: deviceWidth(context) * 0.205,
+          ): EdgeInsets.only(
+            top: deviceHeight(context) * 0.14,
             left: deviceWidth(context) * 0.205,
           ),
           child: Center(
@@ -135,7 +139,7 @@ class ResultScreen extends StatelessWidget {
 
   void navigateToHome() {
     if(score>=7){
-      Navigator.pushNamed(mContext, '/welcome');
+      Navigator.pushNamed(mContext, '/home');
     }else{
       Navigator.pushNamed(mContext, '/quiz',arguments: HomeTileModel(tileName:tile));
     }
