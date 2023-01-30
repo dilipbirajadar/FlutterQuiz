@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/models/home_tile_select.dart';
+import 'package:quiz/models/profile.dart';
 import 'package:quiz/models/result.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -139,7 +140,7 @@ class ResultScreen extends StatelessWidget {
 
   void navigateToHome() {
     if(score>=7){
-      Navigator.pushNamed(mContext, '/home');
+      Navigator.pushNamed(mContext, '/home', arguments: Profile(userName: 'Dilip'));
     }else{
       Navigator.pushNamed(mContext, '/quiz',arguments: HomeTileModel(tileName:tile));
     }
